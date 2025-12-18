@@ -1,5 +1,7 @@
 # Frilans – React + TypeScript + Vite
 
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+
 Ett modernt frilansprojekt byggt med React, TypeScript och Vite.
 
 ## Funktioner

@@ -9,6 +9,11 @@
     text-rendering: optimizelegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    /* Breakpoints */
+    --breakpoint-mobile: 480px;
+    --breakpoint-tablet: 900px;
+    --breakpoint-desktop: 1200px;
 }
 
 a {
@@ -53,6 +58,16 @@ button:hover {
 button:focus,
 button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Vanta.js background container */
+#vanta-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 200vh;
+    z-index: -1;
 }
 
 @media (prefers-color-scheme: light) {

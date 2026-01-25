@@ -1,3 +1,23 @@
+/* Skip to content link for accessibility */
+.skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 0 0 8px 0;
+    z-index: 100;
+    font-weight: 600;
+}
+
+.skip-to-content:focus {
+    top: 0;
+    outline: 3px solid #fff;
+    outline-offset: 2px;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -43,12 +63,15 @@ nav {
     align-items: center;
     gap: 15px;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: inherit;
 }
 
 .logo-icon {
     width: 64px;
     height: 64px;
-    /* --- NOT USED --- .feature-card-tech img (no such class in markup) */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,6 +152,7 @@ nav {
     border-radius: 50px;
     font-weight: 600;
     font-family: 'Calibri', Arial, sans-serif;
+    font-size: 16px;
     transition: all 0.3s ease;
     border: 2px solid rgba(255, 255, 255, 0.3);
     cursor: pointer;
@@ -157,6 +181,25 @@ nav {
     box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
 }
 
+/* Enhanced focus-visible styles for keyboard navigation */
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+.logo:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 5px;
+    border-radius: 8px;
+}
+
+.cta-button:focus-visible {
+    outline: 3px solid rgba(255, 255, 255, 0.9);
+    outline-offset: 4px;
+}
+
 #footer {
     margin-top: 0px;
     margin-bottom: 5vh;
@@ -177,10 +220,13 @@ nav {
     grid-template-columns: 1fr;
 }
 
-.page {
-    display: none;
-    min-height: 100vh;
-    padding: 20px 20px 20px;
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    color: white;
+    font-size: 1.2rem;
 }
 
 .techIcon {
@@ -197,7 +243,7 @@ nav {
     height: 64px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: var(--breakpoint-tablet)) {
     .hero {
         grid-template-columns: 1fr;
         text-align: center;

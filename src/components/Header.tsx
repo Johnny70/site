@@ -5,9 +5,8 @@ export default function Header() {
     return (
         <header>
             <nav className="glass">
-                <div
+                <button
                     className="logo"
-                    tabIndex={1}
                     aria-label="Hem - Logo"
                     onClick={() => navigate('/')}
                 >
@@ -15,8 +14,7 @@ export default function Header() {
                         <img src="/images/logo.png" alt="Logga" width={64} height={64} />
                     </div>
                     <span>Johnny Jakobsson</span>
-                </div>
-                {/* Endast logotyp och namn, inga nav-links */}
+                </button>
             </nav>
         </header>
     );

@@ -1,0 +1,11 @@
+{
+  "tagline": "AI-utveckling / automation",
+  "description1": "Jag bygger små system som tar bort manuellt arbete.",
+  "description2": "Ibland hjälper jag till i externa projekt, oftast i begränsad omfattning.",
+  "nowBuilding": "System för deterministiska AI-flöden",
+  "nowExploring": "LLM + regelbaserade pipelines",
+  "nowAvailability": "~5–10 timmar/vecka",
+  "approachIntro": "Fokus ligger på att bygga system som är:",
+  "approachPoints": ["förutsägbara", "enkla att underhålla", "robusta vid fel"],
+  "approachSuffix": "Där det är möjligt prioriteras struktur framför tolkning."
+}

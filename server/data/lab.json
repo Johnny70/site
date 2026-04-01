@@ -1,0 +1,10 @@
+[
+  {
+    "experiment": "Hur LLM:er beter sig med strikt validering",
+    "result": "Betydligt mer stabil output"
+  },
+  {
+    "experiment": "Fallback-strategier i AI-system",
+    "result": "System blir långsammare men mer tillförlitliga"
+  }
+]

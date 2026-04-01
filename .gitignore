@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Environment variables – NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# Editor & OS
+.vscode/
+.claude/
+.memory/
+*.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Logs
+*.log
+npm-debug.log*
+
+docs/

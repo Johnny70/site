@@ -1,29 +1,44 @@
-// Runtime phone number construction for basic scraper mitigation
-const getPhone = () => {
-    const p = ['079', '356', '89', '35'];
-    return `${p[0]}-${p[1]} ${p[2]} ${p[3]}`;
-};
+// ============================================================
+// MODULE: Footer
+// RESPONSIBILITY: Persistent site footer with contact links fetched from API
+// DEPENDS ON: api/client, api/types
+// EXPOSES: Footer
+// ============================================================
 
-export default function Footer() {
-    return (
-        <footer id="footer">
-            <div className="footer-content glass">
-                <span>
-                    Mail:{' '}
-                    <a href="mailto:johnny.jakobsson@gmail.com" aria-label="Maila mig">
-                        johnny.jakobsson@gmail.com
-                    </a>
-                </span>
-                <br />
-                <span>Tel: {getPhone()}</span>
-                <br />
-                <span>{new Date().getFullYear()} Johnny Jakobsson, no rights reserved.</span>
-                <a href="https://www.brainville.com/SE/Brainville1" target="_blank" rel="noopener noreferrer">
-                    <p>
-                        <img src="https://www.brainville.com/Content/Images/SocialMedia/OnDark_Color.svg" width="64" height="64" alt="Check out our company profile in Brainville" />
-                    </p>
-                </a>
-            </div>
-        </footer>
-    );
+import { useEffect, useState } from 'react'
+import { apiFetch } from '../api/client'
+import type { ContactContent } from '../api/types'
+
+function Footer(): JSX.Element {
+  const [contact, setContact] = useState<ContactContent | null>(null)
+
+  useEffect(() => {
+    apiFetch<ContactContent>('/api/contact')
+      .then(setContact)
+      .catch((err: Error) => { console.error('Footer: failed to load contact data', err.message) })
+  }, [])
+
+  if (contact === null) return <footer className="site-footer" />
+
+  const [mailUser, mailDomain] = contact.email.split('@')
+
+  return (
+    <footer className="site-footer">
+      <a href={`mailto:${mailUser}@${mailDomain}`}>{mailUser}@{mailDomain}</a>
+      {contact.github !== '' && (
+        <>
+          <span className="site-footer__sep">·</span>
+          <a href={contact.github} target="_blank" rel="noreferrer">GitHub</a>
+        </>
+      )}
+      {contact.linkedin !== '' && (
+        <>
+          <span className="site-footer__sep">·</span>
+          <a href={contact.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        </>
+      )}
+    </footer>
+  )
 }
+
+export default Footer

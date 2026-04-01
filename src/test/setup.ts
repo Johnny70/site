@@ -1,11 +1,8 @@
-import { expect, afterEach } from 'vitest';
-import { cleanup } from '@testing-library/react';
-import * as matchers from '@testing-library/jest-dom/matchers';
+// ============================================================
+// MODULE: test/setup
+// RESPONSIBILITY: Global test setup — extends vitest expect with jest-dom matchers
+// DEPENDS ON: @testing-library/jest-dom
+// EXPOSES: nothing (side-effect import only)
+// ============================================================
 
-// Extend Vitest's expect method with jest-dom matchers
-expect.extend(matchers);
-
-// Cleanup after each test case
-afterEach(() => {
-    cleanup();
-});
+import '@testing-library/jest-dom'

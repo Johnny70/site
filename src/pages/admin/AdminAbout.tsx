@@ -5,7 +5,7 @@
 // EXPOSES: AdminAbout
 // ============================================================
 
-import { FormEvent, useEffect, useState } from 'react'
+import { type JSX, type FormEvent, useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
 import type { AboutContent } from '../../api/types'
 
@@ -49,20 +49,21 @@ function AdminAbout(): JSX.Element {
     setSaving(true)
     try {
       await apiFetch<AboutContent>('/api/admin/about', { method: 'PUT', body: { paragraphs }, auth: true })
-      setStatus({ type: 'ok', msg: 'Sparat' })
+      setStatus({ type: 'ok', msg: 'Saved' })
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Okänt fel'
+      console.error('AdminAbout: save failed', err)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatus({ type: 'err', msg })
     } finally {
       setSaving(false)
     }
   }
 
-  if (loading) return <p className="meta">Laddar...</p>
+  if (loading) return <p className="meta">Loading...</p>
 
   return (
     <div className="page">
-      <h1 style={{ marginBottom: '48px' }}>Om</h1>
+      <h1 style={{ marginBottom: '48px' }}>About</h1>
 
       {status !== null && (
         <div className={`status-msg status-msg--${status.type}`}>{status.msg}</div>
@@ -79,17 +80,17 @@ function AdminAbout(): JSX.Element {
               required
             />
             <button type="button" className="btn btn--danger" onClick={() => removeParagraph(index)}>
-              Ta bort
+              Remove
             </button>
           </div>
         ))}
 
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
           <button type="submit" className="btn btn--primary" disabled={saving}>
-            {saving ? 'Sparar...' : 'Spara'}
+            {saving ? 'Saving...' : 'Save'}
           </button>
           <button type="button" className="btn btn--ghost" onClick={addParagraph}>
-            + Lägg till stycke
+            + Add paragraph
           </button>
         </div>
       </form>

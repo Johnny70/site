@@ -5,7 +5,7 @@
 // EXPOSES: Footer
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { apiFetch } from '../api/client'
 import type { ContactContent } from '../api/types'
 

@@ -5,16 +5,15 @@
 // EXPOSES: Work
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFetch } from '../api/client'
 import type { Project } from '../api/types'
+import Seo from '../components/Seo'
 
 function Work(): JSX.Element {
   const [projects, setProjects] = useState<Project[]>([])
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => { document.title = 'Projekt – Johnny Jakobsson' }, [])
 
   useEffect(() => {
     apiFetch<Project[]>('/api/projects')
@@ -28,7 +27,8 @@ function Work(): JSX.Element {
 
   return (
     <div className="page">
-      <h1 style={{ marginBottom: '48px' }}>Projekt</h1>
+      <Seo title="Work" path="/work" />
+      <h1 style={{ marginBottom: '48px' }}>Work</h1>
       <ul className="proj-list">
         {projects.map((project) => (
           <li key={project.slug}>

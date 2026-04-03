@@ -7,8 +7,8 @@
 
 import logging
 from fastapi import APIRouter, HTTPException
-from server.storage import read_json
-from server.models import Project, NowContent, LabEntry, HomeContent, ContactContent, AboutContent
+from storage import read_json
+from models import Project, NowContent, LabEntry, HomeContent, ContactContent, AboutContent
 
 logger = logging.getLogger(__name__)
 

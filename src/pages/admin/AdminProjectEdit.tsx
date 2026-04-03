@@ -5,7 +5,7 @@
 // EXPOSES: AdminProjectEdit
 // ============================================================
 
-import { FormEvent, useEffect, useState } from 'react'
+import { type JSX, type FormEvent, useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { apiFetch } from '../../api/client'
 import type { Project } from '../../api/types'
@@ -39,13 +39,13 @@ function AdminProjectEdit(): JSX.Element {
 
   useEffect(() => {
     if (isNew) return
-    apiFetch<Project>(`/api/admin/projects`, { auth: true })
-      .then(() => apiFetch<Project>(`/api/projects/${slug}`))
+    apiFetch<Project>(`/api/projects/${slug}`)
       .then((data) => {
         setForm(data)
         setLoading(false)
       })
       .catch((err: Error) => {
+        console.error('AdminProjectEdit: load failed', err)
         setStatus({ type: 'err', msg: err.message })
         setLoading(false)
       })
@@ -70,10 +70,11 @@ function AdminProjectEdit(): JSX.Element {
       } else {
         await apiFetch<Project>(`/api/admin/projects/${slug}`, { method: 'PUT', body: form, auth: true })
       }
-      setStatus({ type: 'ok', msg: isNew ? 'Projekt skapat' : 'Sparat' })
+      setStatus({ type: 'ok', msg: isNew ? 'Project created' : 'Saved' })
       if (isNew) navigate(`/admin/projects/${form.slug}`)
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Okänt fel'
+      console.error('AdminProjectEdit: save failed', err)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatus({ type: 'err', msg })
     } finally {
       setSaving(false)
@@ -81,22 +82,23 @@ function AdminProjectEdit(): JSX.Element {
   }
 
   async function handleDelete(): Promise<void> {
-    if (!window.confirm(`Ta bort "${form.title}"?`)) return
+    if (!window.confirm(`Delete "${form.title}"?`)) return
     try {
       await apiFetch<void>(`/api/admin/projects/${slug}`, { method: 'DELETE', auth: true })
       navigate('/admin/projects')
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Okänt fel'
+      console.error('AdminProjectEdit: delete failed', err)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatus({ type: 'err', msg })
     }
   }
 
-  if (loading) return <p className="meta">Laddar...</p>
+  if (loading) return <p className="meta">Loading...</p>
 
   return (
     <div className="page">
-      <Link to="/admin/projects" className="back">← Projekt</Link>
-      <h1 style={{ marginBottom: '48px' }}>{isNew ? 'Nytt projekt' : form.title}</h1>
+      <Link to="/admin/projects" className="back">← Projects</Link>
+      <h1 style={{ marginBottom: '48px' }}>{isNew ? 'New project' : form.title}</h1>
 
       {status !== null && (
         <div className={`status-msg status-msg--${status.type}`}>{status.msg}</div>
@@ -106,9 +108,9 @@ function AdminProjectEdit(): JSX.Element {
         {(
           [
             ['slug', 'Slug'],
-            ['title', 'Titel'],
-            ['shortDescription', 'Kort beskrivning'],
-            ['type', 'Typ'],
+            ['title', 'Title'],
+            ['shortDescription', 'Short description'],
+            ['type', 'Type'],
             ['status', 'Status'],
             ['scope', 'Scope'],
           ] as [keyof Omit<Project, 'systemDesign'>, string][]
@@ -127,12 +129,12 @@ function AdminProjectEdit(): JSX.Element {
 
         {(
           [
-            ['context', 'Kontext'],
+            ['context', 'Context'],
             ['problem', 'Problem'],
-            ['approach', 'Angreppssätt'],
-            ['tech', 'Teknik'],
-            ['result', 'Resultat'],
-            ['notes', 'Noteringar'],
+            ['approach', 'Approach'],
+            ['tech', 'Tech'],
+            ['result', 'Result'],
+            ['notes', 'Notes'],
             ['designPrinciple', 'Design Principle'],
           ] as [keyof Omit<Project, 'systemDesign'>, string][]
         ).map(([field, label]) => (
@@ -148,7 +150,7 @@ function AdminProjectEdit(): JSX.Element {
           </div>
         ))}
 
-        <div className="section__label" style={{ marginBottom: '16px' }}>Systemdesign</div>
+        <div className="section__label" style={{ marginBottom: '16px' }}>System Design</div>
 
         {(
           [
@@ -172,11 +174,11 @@ function AdminProjectEdit(): JSX.Element {
 
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
           <button type="submit" className="btn btn--primary" disabled={saving}>
-            {saving ? 'Sparar...' : isNew ? 'Skapa projekt' : 'Spara'}
+            {saving ? 'Saving...' : isNew ? 'Create project' : 'Save'}
           </button>
           {!isNew && (
             <button type="button" className="btn btn--danger" onClick={handleDelete}>
-              Ta bort
+              Delete
             </button>
           )}
         </div>

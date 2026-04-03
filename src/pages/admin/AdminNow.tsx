@@ -5,14 +5,14 @@
 // EXPOSES: AdminNow
 // ============================================================
 
-import { FormEvent, useEffect, useState } from 'react'
+import { type JSX, type FormEvent, useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
 import type { NowContent } from '../../api/types'
 
 const FIELDS: { field: keyof NowContent; label: string }[] = [
-  { field: 'focus', label: 'Fokus' },
-  { field: 'direction', label: 'Riktning' },
-  { field: 'availability', label: 'Tillgänglighet' },
+  { field: 'focus', label: 'Focus' },
+  { field: 'direction', label: 'Direction' },
+  { field: 'availability', label: 'Availability' },
 ]
 
 function AdminNow(): JSX.Element {
@@ -39,16 +39,17 @@ function AdminNow(): JSX.Element {
     setSaving(true)
     try {
       await apiFetch<NowContent>('/api/admin/now', { method: 'PUT', body: form, auth: true })
-      setStatus({ type: 'ok', msg: 'Sparat' })
+      setStatus({ type: 'ok', msg: 'Saved' })
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Okänt fel'
+      console.error('AdminNow: save failed', err)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatus({ type: 'err', msg })
     } finally {
       setSaving(false)
     }
   }
 
-  if (loading) return <p className="meta">Laddar...</p>
+  if (loading) return <p className="meta">Loading...</p>
 
   return (
     <div className="page">
@@ -72,7 +73,7 @@ function AdminNow(): JSX.Element {
           </div>
         ))}
         <button type="submit" className="btn btn--primary" disabled={saving}>
-          {saving ? 'Sparar...' : 'Spara'}
+          {saving ? 'Saving...' : 'Save'}
         </button>
       </form>
     </div>

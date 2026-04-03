@@ -5,7 +5,7 @@
 // EXPOSES: AdminProjects
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFetch } from '../../api/client'
 import type { Project } from '../../api/types'
@@ -28,7 +28,7 @@ function AdminProjects(): JSX.Element {
   }, [])
 
   if (loading) {
-    return <p className="meta">Laddar...</p>
+    return <p className="meta">Loading...</p>
   }
 
   if (error !== null) {
@@ -38,8 +38,8 @@ function AdminProjects(): JSX.Element {
   return (
     <div className="page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '32px' }}>
-        <h1>Projekt</h1>
-        <Link to="/admin/projects/new" className="btn btn--primary">+ Nytt projekt</Link>
+        <h1>Work</h1>
+        <Link to="/admin/projects/new" className="btn btn--primary">+ New project</Link>
       </div>
 
       <ul className="admin-list">
@@ -50,7 +50,7 @@ function AdminProjects(): JSX.Element {
               <div className="admin-list-item__meta">{project.slug} · {project.status}</div>
             </div>
             <Link to={`/admin/projects/${project.slug}`} className="btn btn--ghost">
-              Redigera →
+              Edit →
             </Link>
           </li>
         ))}

@@ -5,7 +5,7 @@
 // EXPOSES: Layout
 // ============================================================
 
-import { ReactNode } from 'react'
+import { type JSX, type ReactNode } from 'react'
 import Header from './Header'
 import Footer from './Footer'
 

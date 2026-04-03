@@ -1,7 +1,7 @@
 {
-  "paragraphs": [
-    "Arbetar med AI, men främst med system runt AI.",
-    "Fokus ligger på att göra saker som faktiskt fungerar i drift, inte bara i demo.",
-    "Föredrar små, tydliga lösningar framför stora abstraktioner."
-  ]
+    "paragraphs": [
+        "Working with AI, but primarily with the systems around AI.",
+        "The focus is on building things that actually work in production, not just in a demo.",
+        "Prefer small, clear solutions over large abstractions."
+    ]
 }

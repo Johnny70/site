@@ -5,17 +5,17 @@
 // EXPOSES: NotFound
 // ============================================================
 
-import { useEffect } from 'react'
+import { type JSX } from 'react'
 import { Link } from 'react-router-dom'
+import Seo from '../components/Seo'
 
 function NotFound(): JSX.Element {
-  useEffect(() => { document.title = '404 – Johnny Jakobsson' }, [])
-
   return (
     <div className="page">
-      <div className="meta" style={{ marginBottom: '16px' }}>404</div>
-      <p style={{ marginBottom: '32px' }}>Sidan hittades inte.</p>
-      <Link to="/" className="back">← Tillbaka</Link>
+      <Seo title="404" noindex />
+      <h1 className="meta" style={{ marginBottom: '16px' }}>404</h1>
+      <p style={{ marginBottom: '32px' }}>Page not found.</p>
+      <Link to="/" className="back">← Back</Link>
     </div>
   )
 }

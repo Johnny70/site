@@ -5,17 +5,16 @@
 // EXPOSES: Home
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { apiFetch } from '../api/client'
 import type { HomeContent, Project } from '../api/types'
+import Seo from '../components/Seo'
 
 function Home(): JSX.Element {
   const [home, setHome] = useState<HomeContent | null>(null)
   const [projects, setProjects] = useState<Project[]>([])
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => { document.title = 'Johnny Jakobsson' }, [])
 
   useEffect(() => {
     Promise.all([
@@ -34,11 +33,13 @@ function Home(): JSX.Element {
   }
 
   if (home === null) {
-    return <div className="page"><p className="meta">Laddar...</p></div>
+    return <div className="page"><p className="meta">Loading...</p></div>
   }
 
   return (
     <div className="page">
+      <Seo path="/" />
+
       <h1 style={{ marginBottom: '8px' }}>Johnny Jakobsson</h1>
       <p style={{ color: 'var(--fg-muted)', marginBottom: '32px' }}>{home.tagline}</p>
 
@@ -48,18 +49,18 @@ function Home(): JSX.Element {
       <hr />
 
       <div className="section">
-        <div className="section__label">Nu</div>
+        <h2 className="section__label">Now</h2>
         <div className="meta" style={{ marginBottom: '0' }}>
-          <div>Bygger: {home.nowBuilding}</div>
-          <div>Utforskar: {home.nowExploring}</div>
-          <div>Tillgänglighet: {home.nowAvailability}</div>
+          <div>Building: {home.nowBuilding}</div>
+          <div>Exploring: {home.nowExploring}</div>
+          <div>Availability: {home.nowAvailability}</div>
         </div>
       </div>
 
       <hr />
 
       <div className="section">
-        <div className="section__label">Utvalda projekt</div>
+        <h2 className="section__label">Selected work</h2>
         <ul className="proj-list">
           {projects.map((project) => (
             <li key={project.slug}>
@@ -78,7 +79,7 @@ function Home(): JSX.Element {
       <hr />
 
       <div className="section">
-        <div className="section__label">Arbetssätt</div>
+        <h2 className="section__label">Approach</h2>
         <p style={{ marginBottom: '12px' }}>{home.approachIntro}</p>
         <ul className="blist">
           {home.approachPoints.map((point) => (

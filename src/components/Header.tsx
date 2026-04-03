@@ -5,6 +5,7 @@
 // EXPOSES: Header
 // ============================================================
 
+import type { JSX } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 function Header(): JSX.Element {

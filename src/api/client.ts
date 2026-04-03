@@ -5,7 +5,7 @@
 // EXPOSES: apiFetch, saveToken, getToken, clearToken
 // ============================================================
 
-const API_BASE = 'http://localhost:8000'
+const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:8000'
 const TOKEN_KEY = 'admin_token'
 
 export function getToken(): string | null {

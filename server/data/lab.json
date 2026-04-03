@@ -1,10 +1,10 @@
 [
-  {
-    "experiment": "Hur LLM:er beter sig med strikt validering",
-    "result": "Betydligt mer stabil output"
-  },
-  {
-    "experiment": "Fallback-strategier i AI-system",
-    "result": "System blir långsammare men mer tillförlitliga"
-  }
+    {
+        "experiment": "How LLMs behave with strict validation",
+        "result": "Significantly more stable output"
+    },
+    {
+        "experiment": "Fallback strategies in AI systems",
+        "result": "Systems become slower but more reliable"
+    }
 ]

@@ -1,86 +1,86 @@
 [
-  {
-    "slug": "deterministiska-kodregler-for-ai",
-    "title": "Deterministiska kodregler för AI-genererad kod",
-    "shortDescription": "Regelverk för att styra AI-genererad kod mot enkelhet, stabilitet och determinism",
-    "type": "System",
-    "status": "Aktiv",
-    "scope": "Internt",
-    "context": "AI-genererad kod tenderar att vara inkonsekvent, implicit och svår att underhålla.",
-    "problem": "Kod från LLM:er innehåller ofta heuristik, dolda beroenden och bristande felhantering.",
-    "approach": "Definiera ett strikt regelverk som begränsar hur kod får skrivas och struktureras.",
-    "systemDesign": {
-      "input": "Kod genererad av AI",
-      "processing": "Regelstyrning via tydliga constraints och krav på struktur",
-      "output": "Kod som är deterministisk, explicit och lätt att verifiera",
-      "constraints": "Ingen implicit logik, inga tysta fel, full spårbarhet"
+    {
+        "slug": "deterministic-code-rules-for-ai",
+        "title": "Deterministic code rules for AI-generated code",
+        "shortDescription": "A ruleset for steering AI-generated code towards simplicity, stability, and determinism",
+        "type": "System",
+        "status": "Active",
+        "scope": "Internal",
+        "context": "AI-generated code tends to be inconsistent, implicit, and hard to maintain.",
+        "problem": "Code from LLMs often contains heuristics, hidden dependencies, and poor error handling.",
+        "approach": "Define a strict ruleset that constrains how code may be written and structured.",
+        "systemDesign": {
+            "input": "AI-generated code",
+            "processing": "Rule enforcement via explicit constraints and structural requirements",
+            "output": "Code that is deterministic, explicit, and easy to verify",
+            "constraints": "No implicit logic, no silent failures, full traceability"
+        },
+        "tech": "Rule-based framework, language-agnostic",
+        "result": "More stable and predictable code from AI generation",
+        "notes": "The ruleset is actively used to govern AI-generated code in personal projects.",
+        "designPrinciple": "Everything that can be made explicit must be made explicit"
     },
-    "tech": "Regelbaserat ramverk, språkagnostiskt",
-    "result": "Mer stabil och förutsägbar kod från AI-generering",
-    "notes": "Regelverket används aktivt för att styra AI-genererad kod i egna projekt.",
-    "designPrinciple": "Allt som kan göras explicit måste göras explicit"
-  },
-  {
-    "slug": "ai-baserad-jobbmatchning",
-    "title": "AI-baserad jobbmatchning och kompetensanalys",
-    "shortDescription": "Matchning av jobb baserat på AI-extraherade kompetenser och trendanalys",
-    "type": "Automation",
-    "status": "Klar",
-    "scope": "Internt",
-    "context": "Jobbannonser saknar ofta struktur vilket gör det svårt att matcha kompetenser manuellt.",
-    "problem": "Svårt att avgöra relevans mellan CV och jobbannonser samt identifiera efterfrågade kompetenser.",
-    "approach": "Extrahera kompetenser från både CV och jobbannonser med AI, och beräkna matchning baserat på detta.",
-    "systemDesign": {
-      "input": "CV + jobbannonser från AF API",
-      "processing": "AI-extraktion → normalisering → matchningsalgoritm → trendanalys",
-      "output": "Matchningsscore per jobb + kompetenstrender + genererat personligt brev",
-      "constraints": "Jobbannonser saknar struktur och kräver robust extraktion"
+    {
+        "slug": "ai-based-job-matching",
+        "title": "AI-based job matching and skills analysis",
+        "shortDescription": "Job matching based on AI-extracted skills and trend analysis",
+        "type": "Automation",
+        "status": "Done",
+        "scope": "Internal",
+        "context": "Job listings often lack structure, making it hard to match skills manually.",
+        "problem": "Difficult to assess relevance between a CV and job listings, or identify demanded skills.",
+        "approach": "Extract skills from both CV and job listings using AI, then calculate matching based on that.",
+        "systemDesign": {
+            "input": "CV + job listings from the AF API",
+            "processing": "AI extraction → normalisation → matching algorithm → trend analysis",
+            "output": "Match score per job + skill trends + generated cover letter",
+            "constraints": "Job listings lack structure and require robust extraction"
+        },
+        "tech": "AF API, LLM for extraction/generation, local storage for trend data",
+        "result": "Produces match scores, identifies relevant jobs, and surfaces changes in demanded skills",
+        "notes": "Trend analysis is based on local history, giving a limited but fast signal.",
+        "designPrinciple": "Structured skill data is prioritised over raw text to enable comparability"
     },
-    "tech": "AF API, LLM för extraktion/generering, lokal lagring för trenddata",
-    "result": "Ger matchningsscore, identifierar relevanta jobb och synliggör förändringar i efterfrågade kompetenser",
-    "notes": "Trendanalys baseras på lokal historik vilket ger begränsad men snabb signal.",
-    "designPrinciple": "Strukturerad kompetensdata prioriteras över rå text för att möjliggöra jämförbarhet"
-  },
-  {
-    "slug": "kodagentBegransningar",
-    "title": "Kodagent: begränsningar i AI-driven kodgenerering",
-    "shortDescription": "Analys av varför autonoma kodagenter är svåra att göra stabila och produktionsdugliga",
-    "type": "Analys",
-    "status": "Pausad",
-    "scope": "Internt",
-    "context": "Försök att bygga en agent som självständigt kan planera, skriva och modifiera kod via en iterativ agentloop.",
-    "problem": "AI-genererad kod är svår att göra stabil, verifierbar och konsekvent över flera iterationer, särskilt i system med autonom exekvering.",
-    "approach": "Experimenterade med agentloopar, tool-calling, kodgenerering och olika former av validering och feedback.",
-    "systemDesign": {
-      "input": "Uppgiftsspecifikation",
-      "processing": "Planering → kodgenerering → verktygsanrop → exekvering → validering → iteration",
-      "output": "Modifierad och uppdaterad kodbas",
-      "constraints": "Det är svårt att säkerställa determinism, korrekthet och konsekvent beteende över flera iterationer i ett autonomt system"
+    {
+        "slug": "code-agent-limitations",
+        "title": "Code agent: limitations of AI-driven code generation",
+        "shortDescription": "Analysis of why autonomous code agents are hard to make stable and production-ready",
+        "type": "Analysis",
+        "status": "Paused",
+        "scope": "Internal",
+        "context": "An attempt to build an agent that can independently plan, write, and modify code via an iterative agent loop.",
+        "problem": "AI-generated code is hard to make stable, verifiable, and consistent across iterations, especially in systems with autonomous execution.",
+        "approach": "Experimented with agent loops, tool-calling, code generation, and various forms of validation and feedback.",
+        "systemDesign": {
+            "input": "Task specification",
+            "processing": "Planning → code generation → tool calls → execution → validation → iteration",
+            "output": "Modified and updated codebase",
+            "constraints": "Hard to guarantee determinism, correctness, and consistent behaviour across iterations in an autonomous system"
+        },
+        "tech": "LLM, agent loops, tool-calling, code execution",
+        "result": "Identifies where autonomous code agents break down and what architectural and verification constraints are needed to build stable systems.",
+        "notes": "The project was paused after the realisation that the problem requires stricter control, clearer constraints, and more verifiable architecture than a fully autonomous system allows.",
+        "designPrinciple": "Limited autonomy with a focus on control, determinism, and verifiability over maximum independence"
     },
-    "tech": "LLM, agentloopar, tool-calling, kodexekvering",
-    "result": "Identifierar var autonoma kodagenter bryter ned samt vilka arkitekturella och verifieringsmässiga begränsningar som krävs för att bygga stabila system.",
-    "notes": "Projektet pausades efter insikten att problemet kräver striktare kontroll, tydligare begränsningar och mer verifierbar arkitektur än vad ett helt autonomt system tillåter.",
-    "designPrinciple": "Begränsad autonomi med fokus på kontroll, determinism och verifierbarhet framför maximal självständighet"
-  },
-  {
-    "slug": "strukturerad-cv-generering-med-ai",
-    "title": "Strukturerad CV-generering med AI",
-    "shortDescription": "Form-baserad CV-generering med AI-stöd och ATS-anpassad output",
-    "type": "Automation",
-    "status": "Klar",
-    "scope": "Internt",
-    "context": "Många CV:n saknar tydlig struktur och är svåra att anpassa manuellt för olika jobb.",
-    "problem": "Ostrukturerade CV:n fungerar sämre i ATS-system och kräver mycket manuell redigering.",
-    "approach": "Separera struktur från innehåll. Använd formulär för struktur och AI för extraktion och förbättring.",
-    "systemDesign": {
-      "input": "Formulärdata eller befintligt CV",
-      "processing": "AI-extraktion → strukturering → förbättringsförslag → preview-rendering",
-      "output": "ATS-anpassat CV (DOCX) + HTML-preview",
-      "constraints": "Måste vara konsekvent strukturerat och minimera fri text"
-    },
-    "tech": "Form-baserad UI, LLM för extraktion/förbättring, HTML-rendering",
-    "result": "Snabb generering av strukturerade CV:n med minskad manuell iteration",
-    "notes": "AI-extraktion kräver normalisering för stabil output. Preview-funktion förenklar iteration.",
-    "designPrinciple": "Struktur prioriteras över flexibilitet för att säkerställa kompatibilitet med ATS-system"
-  }
+    {
+        "slug": "structured-cv-generation-with-ai",
+        "title": "Structured CV generation with AI",
+        "shortDescription": "Form-based CV generation with AI support and ATS-optimised output",
+        "type": "Automation",
+        "status": "Done",
+        "scope": "Internal",
+        "context": "Many CVs lack clear structure and are hard to adapt manually for different jobs.",
+        "problem": "Unstructured CVs perform worse in ATS systems and require a lot of manual editing.",
+        "approach": "Separate structure from content. Use forms for structure and AI for extraction and improvement.",
+        "systemDesign": {
+            "input": "Form data or an existing CV",
+            "processing": "AI extraction → structuring → improvement suggestions → preview rendering",
+            "output": "ATS-optimised CV (DOCX) + HTML preview",
+            "constraints": "Must be consistently structured and minimise free text"
+        },
+        "tech": "Form-based UI, LLM for extraction/improvement, HTML rendering",
+        "result": "Fast generation of structured CVs with reduced manual iteration",
+        "notes": "AI extraction requires normalisation for stable output. Preview function simplifies iteration.",
+        "designPrinciple": "Structure is prioritised over flexibility to ensure ATS compatibility"
+    }
 ]

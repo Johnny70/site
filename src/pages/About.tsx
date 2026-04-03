@@ -5,15 +5,14 @@
 // EXPOSES: About
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { apiFetch } from '../api/client'
 import type { AboutContent } from '../api/types'
+import Seo from '../components/Seo'
 
 function About(): JSX.Element {
   const [content, setContent] = useState<AboutContent | null>(null)
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => { document.title = 'Om – Johnny Jakobsson' }, [])
 
   useEffect(() => {
     apiFetch<AboutContent>('/api/about')
@@ -26,12 +25,13 @@ function About(): JSX.Element {
   }
 
   if (content === null) {
-    return <div className="page"><p className="meta">Laddar...</p></div>
+    return <div className="page"><p className="meta">Loading...</p></div>
   }
 
   return (
     <div className="page">
-      <h1 style={{ marginBottom: '48px' }}>Om</h1>
+      <Seo title="About" path="/about" />
+      <h1 style={{ marginBottom: '48px' }}>About</h1>
 
       <div className="section">
         {content.paragraphs.map((p, i) => (

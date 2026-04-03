@@ -7,9 +7,9 @@
 
 import logging
 from fastapi import APIRouter, HTTPException, Depends
-from server.storage import read_json, write_json
-from server.models import Project, NowContent, LabEntry, HomeContent, ContactContent, AboutContent
-from server.auth import verify_token
+from storage import read_json, write_json
+from models import Project, NowContent, LabEntry, HomeContent, ContactContent, AboutContent
+from auth import verify_token
 
 logger = logging.getLogger(__name__)
 

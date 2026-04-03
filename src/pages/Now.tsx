@@ -5,15 +5,14 @@
 // EXPOSES: Now
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { apiFetch } from '../api/client'
 import type { NowContent } from '../api/types'
+import Seo from '../components/Seo'
 
 function Now(): JSX.Element {
   const [content, setContent] = useState<NowContent | null>(null)
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => { document.title = 'Nu – Johnny Jakobsson' }, [])
 
   useEffect(() => {
     apiFetch<NowContent>('/api/now')
@@ -26,25 +25,26 @@ function Now(): JSX.Element {
   }
 
   if (content === null) {
-    return <div className="page"><p className="meta">Laddar...</p></div>
+    return <div className="page"><p className="meta">Loading...</p></div>
   }
 
   return (
     <div className="page">
-      <h1 style={{ marginBottom: '48px' }}>Nu</h1>
+      <Seo title="Now" path="/now" />
+      <h1 style={{ marginBottom: '48px' }}>Now</h1>
 
       <div className="section">
-        <div className="section__label">Fokus</div>
+        <h2 className="section__label">Focus</h2>
         <p>{content.focus}</p>
       </div>
 
       <div className="section">
-        <div className="section__label">Riktning</div>
+        <h2 className="section__label">Direction</h2>
         <p>{content.direction}</p>
       </div>
 
       <div className="section">
-        <div className="section__label">Tillgänglighet</div>
+        <h2 className="section__label">Availability</h2>
         <p>{content.availability}</p>
       </div>
     </div>

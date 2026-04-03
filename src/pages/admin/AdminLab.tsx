@@ -5,7 +5,7 @@
 // EXPOSES: AdminLab
 // ============================================================
 
-import { FormEvent, useEffect, useState } from 'react'
+import { type JSX, type FormEvent, useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
 import type { LabEntry } from '../../api/types'
 
@@ -49,16 +49,17 @@ function AdminLab(): JSX.Element {
     setSaving(true)
     try {
       await apiFetch<LabEntry[]>('/api/admin/lab', { method: 'PUT', body: entries, auth: true })
-      setStatus({ type: 'ok', msg: 'Sparat' })
+      setStatus({ type: 'ok', msg: 'Saved' })
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Okänt fel'
+      console.error('AdminLab: save failed', err)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatus({ type: 'err', msg })
     } finally {
       setSaving(false)
     }
   }
 
-  if (loading) return <p className="meta">Laddar...</p>
+  if (loading) return <p className="meta">Loading...</p>
 
   return (
     <div className="page">
@@ -74,7 +75,7 @@ function AdminLab(): JSX.Element {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
               <span className="section__label">Experiment {index + 1}</span>
               <button type="button" className="btn btn--danger" onClick={() => removeEntry(index)}>
-                Ta bort
+                Remove
               </button>
             </div>
             <div className="form-group">
@@ -88,7 +89,7 @@ function AdminLab(): JSX.Element {
               />
             </div>
             <div className="form-group">
-              <label className="form-label" htmlFor={`res-${index}`}>Resultat</label>
+              <label className="form-label" htmlFor={`res-${index}`}>Result</label>
               <textarea
                 id={`res-${index}`}
                 className="textarea"
@@ -102,10 +103,10 @@ function AdminLab(): JSX.Element {
 
         <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
           <button type="submit" className="btn btn--primary" disabled={saving}>
-            {saving ? 'Sparar...' : 'Spara'}
+            {saving ? 'Saving...' : 'Save'}
           </button>
           <button type="button" className="btn btn--ghost" onClick={addEntry}>
-            + Lägg till experiment
+            + Add experiment
           </button>
         </div>
       </form>

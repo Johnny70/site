@@ -5,15 +5,14 @@
 // EXPOSES: Contact
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { apiFetch } from '../api/client'
 import type { ContactContent } from '../api/types'
+import Seo from '../components/Seo'
 
 function Contact(): JSX.Element {
   const [contact, setContact] = useState<ContactContent | null>(null)
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => { document.title = 'Kontakt – Johnny Jakobsson' }, [])
 
   useEffect(() => {
     apiFetch<ContactContent>('/api/contact')
@@ -26,20 +25,21 @@ function Contact(): JSX.Element {
   }
 
   if (contact === null) {
-    return <div className="page"><p className="meta">Laddar...</p></div>
+    return <div className="page"><p className="meta">Loading...</p></div>
   }
 
   const [mailUser, mailDomain] = contact.email.split('@')
 
   return (
     <div className="page">
-      <h1 style={{ marginBottom: '48px' }}>Kontakt</h1>
+      <Seo title="Contact" path="/contact" />
+      <h1 style={{ marginBottom: '48px' }}>Contact</h1>
 
       <div className="section">
-        <p style={{ marginBottom: '16px' }}>Om något är relevant:</p>
+        <p style={{ marginBottom: '16px' }}>If it's relevant:</p>
         <a href={`mailto:${mailUser}@${mailDomain}`}>{mailUser}@{mailDomain}</a>
         <p style={{ marginTop: '16px', color: 'var(--fg-muted)' }}>
-          Beskriv kort vad det gäller.
+          Briefly describe what it's about.
         </p>
       </div>
     </div>

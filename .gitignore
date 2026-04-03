@@ -28,4 +28,7 @@ venv/
 *.log
 npm-debug.log*
 
+#Out of scope
 docs/
+deploy.sh
+.env.production

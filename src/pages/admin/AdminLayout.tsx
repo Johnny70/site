@@ -5,6 +5,7 @@
 // EXPOSES: AdminLayout
 // ============================================================
 
+import type { JSX } from 'react'
 import { Link, NavLink, Navigate, Outlet, useNavigate } from 'react-router-dom'
 import { getToken, clearToken } from '../../api/client'
 import Footer from '../../components/Footer'
@@ -39,12 +40,12 @@ function AdminLayout(): JSX.Element {
           </div>
         </div>
         <nav className="admin-nav">
-          <NavLink to="/admin/projects">Projects</NavLink>
+          <NavLink to="/admin/home">Home</NavLink>
+          <NavLink to="/admin/projects">Work</NavLink>
           <NavLink to="/admin/now">Now</NavLink>
           <NavLink to="/admin/lab">Lab</NavLink>
-          <NavLink to="/admin/home">Home</NavLink>
-          <NavLink to="/admin/contact">Contact</NavLink>
           <NavLink to="/admin/about">About</NavLink>
+          <NavLink to="/admin/contact">Contact</NavLink>
         </nav>
       </header>
       <main>

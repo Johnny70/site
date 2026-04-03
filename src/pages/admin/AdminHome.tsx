@@ -5,7 +5,7 @@
 // EXPOSES: AdminHome
 // ============================================================
 
-import { FormEvent, useEffect, useState } from 'react'
+import { type JSX, type FormEvent, useEffect, useState } from 'react'
 import { apiFetch } from '../../api/client'
 import type { HomeContent } from '../../api/types'
 
@@ -54,16 +54,17 @@ function AdminHome(): JSX.Element {
     try {
       await apiFetch<HomeContent>('/api/admin/home', { method: 'PUT', body: payload, auth: true })
       setForm(payload)
-      setStatus({ type: 'ok', msg: 'Sparat' })
+      setStatus({ type: 'ok', msg: 'Saved' })
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Okänt fel'
+      console.error('AdminHome: save failed', err)
+      const msg = err instanceof Error ? err.message : 'Unknown error'
       setStatus({ type: 'err', msg })
     } finally {
       setSaving(false)
     }
   }
 
-  if (loading) return <p className="meta">Laddar...</p>
+  if (loading) return <p className="meta">Loading...</p>
 
   return (
     <div className="page">
@@ -74,43 +75,48 @@ function AdminHome(): JSX.Element {
       )}
 
       <form onSubmit={handleSubmit}>
-        {(
-          [
-            ['tagline', 'Tagline'],
-            ['description1', 'Beskrivning 1'],
-            ['description2', 'Beskrivning 2'],
-          ] as [keyof Omit<HomeContent, 'approachPoints'>, string][]
-        ).map(([field, label]) => (
-          <div className="form-group" key={field}>
-            <label className="form-label" htmlFor={field}>{label}</label>
-            <input id={field} className="input" value={form[field]} onChange={(e) => handleField(field, e.target.value)} required />
-          </div>
-        ))}
 
-        <div className="section__label" style={{ marginBottom: '16px' }}>Nu-block</div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="tagline">Tagline</label>
+          <input id="tagline" className="input" value={form.tagline} onChange={(e) => handleField('tagline', e.target.value)} required />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="description1">Description (paragraph 1)</label>
+          <textarea id="description1" className="textarea" value={form.description1} onChange={(e) => handleField('description1', e.target.value)} required />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="description2">Description (paragraph 2)</label>
+          <textarea id="description2" className="textarea" value={form.description2} onChange={(e) => handleField('description2', e.target.value)} required />
+        </div>
 
-        {(
-          [
-            ['nowBuilding', 'Bygger'],
-            ['nowExploring', 'Utforskar'],
-            ['nowAvailability', 'Tillgänglighet'],
-          ] as [keyof Omit<HomeContent, 'approachPoints'>, string][]
-        ).map(([field, label]) => (
-          <div className="form-group" key={field}>
-            <label className="form-label" htmlFor={field}>{label}</label>
-            <input id={field} className="input" value={form[field]} onChange={(e) => handleField(field, e.target.value)} required />
-          </div>
-        ))}
+        <hr />
 
-        <div className="section__label" style={{ marginBottom: '16px' }}>Arbetssätt</div>
+        <div className="section__label" style={{ marginBottom: '16px' }}>Now</div>
+        <p className="meta" style={{ marginBottom: '16px' }}>Shown in the "Now" block on the home page.</p>
+
+        <div className="form-group">
+          <label className="form-label" htmlFor="nowBuilding">Building</label>
+          <input id="nowBuilding" className="input" value={form.nowBuilding} onChange={(e) => handleField('nowBuilding', e.target.value)} required />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="nowExploring">Exploring</label>
+          <input id="nowExploring" className="input" value={form.nowExploring} onChange={(e) => handleField('nowExploring', e.target.value)} required />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="nowAvailability">Availability</label>
+          <input id="nowAvailability" className="input" value={form.nowAvailability} onChange={(e) => handleField('nowAvailability', e.target.value)} required />
+        </div>
+
+        <hr />
+
+        <div className="section__label" style={{ marginBottom: '16px' }}>Approach</div>
 
         <div className="form-group">
           <label className="form-label" htmlFor="approachIntro">Intro</label>
           <input id="approachIntro" className="input" value={form.approachIntro} onChange={(e) => handleField('approachIntro', e.target.value)} required />
         </div>
-
         <div className="form-group">
-          <label className="form-label" htmlFor="approachPoints">Punkter (en per rad)</label>
+          <label className="form-label" htmlFor="approachPoints">Points (one per line)</label>
           <textarea
             id="approachPoints"
             className="textarea"
@@ -119,14 +125,13 @@ function AdminHome(): JSX.Element {
             style={{ minHeight: '88px' }}
           />
         </div>
-
         <div className="form-group">
-          <label className="form-label" htmlFor="approachSuffix">Avslutning</label>
+          <label className="form-label" htmlFor="approachSuffix">Closing line</label>
           <input id="approachSuffix" className="input" value={form.approachSuffix} onChange={(e) => handleField('approachSuffix', e.target.value)} required />
         </div>
 
         <button type="submit" className="btn btn--primary" disabled={saving}>
-          {saving ? 'Sparar...' : 'Spara'}
+          {saving ? 'Saving...' : 'Save'}
         </button>
       </form>
     </div>

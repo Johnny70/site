@@ -5,7 +5,7 @@
 // EXPOSES: Login
 // ============================================================
 
-import { FormEvent, useState } from 'react'
+import { type JSX, type FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiFetch, saveToken, clearToken } from '../../api/client'
 
@@ -25,9 +25,10 @@ function Login(): JSX.Element {
     try {
       await apiFetch<{ status: string }>('/api/admin/ping', { auth: true })
       navigate('/admin/projects')
-    } catch {
+    } catch (err: unknown) {
+      console.error('Login: token verification failed', err)
       clearToken()
-      setError('Ogiltigt token')
+      setError('Invalid token')
     } finally {
       setLoading(false)
     }
@@ -58,7 +59,7 @@ function Login(): JSX.Element {
           )}
 
           <button type="submit" className="btn btn--primary" disabled={loading}>
-            {loading ? 'Verifierar...' : 'Logga in'}
+            {loading ? 'Verifying...' : 'Log in'}
           </button>
         </form>
       </div>

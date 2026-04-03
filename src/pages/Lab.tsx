@@ -5,15 +5,14 @@
 // EXPOSES: Lab
 // ============================================================
 
-import { useEffect, useState } from 'react'
+import { type JSX, useEffect, useState } from 'react'
 import { apiFetch } from '../api/client'
 import type { LabEntry } from '../api/types'
+import Seo from '../components/Seo'
 
 function Lab(): JSX.Element {
   const [entries, setEntries] = useState<LabEntry[]>([])
   const [error, setError] = useState<string | null>(null)
-
-  useEffect(() => { document.title = 'Lab – Johnny Jakobsson' }, [])
 
   useEffect(() => {
     apiFetch<LabEntry[]>('/api/lab')
@@ -27,17 +26,18 @@ function Lab(): JSX.Element {
 
   return (
     <div className="page">
+      <Seo title="Lab" path="/lab" description="Testing deterministic AI flows and experimental software." />
       <h1 style={{ marginBottom: '8px' }}>Lab</h1>
       <p style={{ color: 'var(--fg-muted)', marginBottom: '48px' }}>
-        Testar deterministiska AI-flöden
+        Testing deterministic AI flows
       </p>
 
       {entries.map((entry, index) => (
         <div key={index}>
           <div className="section">
-            <div className="section__label">Experiment</div>
+            <h2 className="section__label">Experiment</h2>
             <p>{entry.experiment}</p>
-            <div className="section__label" style={{ marginTop: '16px' }}>Resultat</div>
+            <h3 className="section__label" style={{ marginTop: '16px' }}>Result</h3>
             <p>{entry.result}</p>
           </div>
           {index < entries.length - 1 && <hr />}

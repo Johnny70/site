@@ -27,6 +27,7 @@ export type Project = {
   result: string
   notes: string
   designPrinciple: string
+  githubUrl?: string
 }
 
 export type NowContent = {

@@ -1,5 +1,26 @@
 [
     {
+        "slug": "structured-cv-generation-with-ai",
+        "title": "Structured CV generation with AI",
+        "shortDescription": "CV generation with clear structure using AI extraction and ATS optimisation",
+        "type": "Automation",
+        "status": "Done",
+        "scope": "Internal",
+        "context": "Many CVs lack clear structure and are hard to adapt manually for different jobs.",
+        "problem": "Unstructured CVs perform worse in ATS systems and require a lot of manual editing.",
+        "approach": "Separate structure from content. Use forms for structure and AI for extraction and improvement.",
+        "systemDesign": {
+            "input": "Form data or an existing CV",
+            "processing": "AI extraction → structuring → improvement suggestions → preview rendering",
+            "output": "ATS-optimised CV (DOCX) + HTML preview",
+            "constraints": "Must be consistently structured and minimise free text"
+        },
+        "tech": "Form-based UI, LLM for extraction/improvement, HTML rendering",
+        "result": "Fast generation of structured CVs with reduced manual iteration",
+        "notes": "AI extraction requires normalisation for stable output. Preview function simplifies iteration.",
+        "designPrinciple": "Structure is prioritised over flexibility to ensure ATS compatibility"
+    },
+    {
         "slug": "deterministic-code-rules-for-ai",
         "title": "Deterministic code rules for AI-generated code",
         "shortDescription": "A ruleset for steering AI-generated code towards simplicity, stability, and determinism",
@@ -61,26 +82,5 @@
         "result": "Identifies where autonomous code agents break down and what architectural and verification constraints are needed to build stable systems.",
         "notes": "The project was paused after the realisation that the problem requires stricter control, clearer constraints, and more verifiable architecture than a fully autonomous system allows.",
         "designPrinciple": "Limited autonomy with a focus on control, determinism, and verifiability over maximum independence"
-    },
-    {
-        "slug": "structured-cv-generation-with-ai",
-        "title": "Structured CV generation with AI",
-        "shortDescription": "Form-based CV generation with AI support and ATS-optimised output",
-        "type": "Automation",
-        "status": "Done",
-        "scope": "Internal",
-        "context": "Many CVs lack clear structure and are hard to adapt manually for different jobs.",
-        "problem": "Unstructured CVs perform worse in ATS systems and require a lot of manual editing.",
-        "approach": "Separate structure from content. Use forms for structure and AI for extraction and improvement.",
-        "systemDesign": {
-            "input": "Form data or an existing CV",
-            "processing": "AI extraction → structuring → improvement suggestions → preview rendering",
-            "output": "ATS-optimised CV (DOCX) + HTML preview",
-            "constraints": "Must be consistently structured and minimise free text"
-        },
-        "tech": "Form-based UI, LLM for extraction/improvement, HTML rendering",
-        "result": "Fast generation of structured CVs with reduced manual iteration",
-        "notes": "AI extraction requires normalisation for stable output. Preview function simplifies iteration.",
-        "designPrinciple": "Structure is prioritised over flexibility to ensure ATS compatibility"
     }
 ]

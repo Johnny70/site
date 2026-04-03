@@ -25,6 +25,7 @@ const EMPTY_PROJECT: Project = {
   result: '',
   notes: '',
   designPrinciple: '',
+  githubUrl: '',
 }
 
 function AdminProjectEdit(): JSX.Element {
@@ -113,6 +114,7 @@ function AdminProjectEdit(): JSX.Element {
             ['type', 'Type'],
             ['status', 'Status'],
             ['scope', 'Scope'],
+            ['githubUrl', 'GitHub URL'],
           ] as [keyof Omit<Project, 'systemDesign'>, string][]
         ).map(([field, label]) => (
           <div className="form-group" key={field}>
@@ -122,7 +124,7 @@ function AdminProjectEdit(): JSX.Element {
               className="input"
               value={form[field] as string}
               onChange={(e) => handleField(field, e.target.value)}
-              required
+              required={field !== 'githubUrl'}
             />
           </div>
         ))}

@@ -99,6 +99,14 @@ function WorkDetail(): JSX.Element {
         <h2 className="section__label">Design Principle</h2>
         <p>{project.designPrinciple}</p>
       </div>
+
+      {project.githubUrl !== undefined && project.githubUrl !== '' && (
+        <div className="section">
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+            View on GitHub →
+          </a>
+        </div>
+      )}
     </div>
   )
 }

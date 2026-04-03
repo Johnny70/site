@@ -62,6 +62,19 @@ def admin_delete_project(slug: str) -> None:
     logger.info("Deleted project: %s", slug)
 
 
+@router.put("/api/admin/projects-order")
+def admin_reorder_projects(slugs: list[str]) -> list[Project]:
+    projects: list[dict] = read_json("projects.json")
+    index = {p["slug"]: p for p in projects}
+    missing = [s for s in slugs if s not in index]
+    if missing:
+        raise HTTPException(status_code=400, detail=f"Unknown slugs: {missing}")
+    reordered = [index[s] for s in slugs]
+    write_json("projects.json", reordered)
+    logger.info("Reordered projects: %s", slugs)
+    return reordered
+
+
 # --- Now ---
 
 @router.put("/api/admin/now")
